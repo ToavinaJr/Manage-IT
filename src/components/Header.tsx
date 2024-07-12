@@ -6,8 +6,8 @@ const Header = () => {
     const [openMenu, setOpenMenu] = useState(false);
 
     const handleMenu = () => {
-        setOpenMenu(!openMenu);   
-        !openMenu ? disablePageScroll() :  enablePageScroll();
+        setOpenMenu(!openMenu);
+        !openMenu ? disablePageScroll() : enablePageScroll();
     };
     return (
         <header
@@ -122,22 +122,39 @@ const Header = () => {
             />
 
             {openMenu && (
-                <div>
+                <div
+                    className={`
+                    flex
+                    flex-col
+                    items-center
+                    justify-center
+                    md:hidden
+                    gap-10
+                    md:gap-5 
+                    fixed
+                    min-h-screen
+                    w-full
+                    top-0
+                    left-0
+                    bg-slate-100
+                    z-[5]
+                    `}
+                >
                     <ul
                         className={`
-                            flex
-                            flex-col
-                            items-center
-                            justify-center
-                            md:hidden
-                            gap-10
-                            md:gap-5 
-                            fixed
-                            h-screen
-                            w-full
-                            top-0
-                            left-0
-                            bg-slate-100
+                        flex
+                        flex-col
+                        items-center
+                        justify-center
+                        md:hidden
+                        gap-10
+                        md:gap-5 
+                        fixed
+                        h-screen
+                        w-full
+                        top-0
+                        left-0
+                        bg-slate-100
                         `}
                     >
                         {links.map((link, index) => (
