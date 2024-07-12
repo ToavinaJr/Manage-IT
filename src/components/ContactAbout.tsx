@@ -132,6 +132,9 @@ const ContactAbout = () => {
                         p-4
                         rounded-3xl
                         inline-none
+                        focus:outline-none 
+                        focus:ring-0
+                        focus:border-transparent
                     "
                 />
                 <button 
