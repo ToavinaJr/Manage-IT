@@ -1,8 +1,14 @@
-import ButtonStart from "./ButtonStart";
+import { useState } from "react";
+import { disablePageScroll, enablePageScroll } from "scroll-lock";
 
 const Header = () => {
     const links = ["Pricing", "Product", "About Us", "Careers", "Community"];
+    const [openMenu, setOpenMenu] = useState(false);
 
+    const handleMenu = () => {
+        setOpenMenu(!openMenu);   
+        !openMenu ? disablePageScroll() :  enablePageScroll();
+    };
     return (
         <header
             className="
@@ -66,22 +72,22 @@ const Header = () => {
                 </svg>
             </div>
             <ul
-                className="
+                className={`
                     p-2
                     hidden md:flex
                     gap-10
-                    md:gap-5
-                "
+                    md:gap-5 
+                `}
             >
                 {links.map((link, index) => (
                     <li
                         key={index}
-                        className="
-                                hover:cursor-pointer
-                                text-zinc-500
-                                font-bold
-                                hover:underline
-                            "
+                        className={`
+                            hover:cursor-pointer
+                            text-zinc-500
+                            font-bold
+                            hover:underline
+                        `}
                     >
                         {link}
                     </li>
@@ -104,14 +110,63 @@ const Header = () => {
             >
                 Get Started
             </div>
-            <img 
-                src="public/images/icon-hamburger.svg" 
-                alt="" 
+            <img
+                src="public/images/icon-hamburger.svg"
+                alt=""
                 className="
                     flex
                     md:hidden
-                " 
+                    cursor-pointer
+                "
+                onClick={handleMenu}
             />
+
+            {openMenu && (
+                <div>
+                    <ul
+                        className={`
+                            flex
+                            flex-col
+                            items-center
+                            justify-center
+                            md:hidden
+                            gap-10
+                            md:gap-5 
+                            fixed
+                            h-screen
+                            w-full
+                            top-0
+                            left-0
+                            bg-slate-100
+                        `}
+                    >
+                        {links.map((link, index) => (
+                            <li
+                                key={index}
+                                className={`
+                                    hover:cursor-pointer
+                                    text-zinc-500
+                                    font-bold
+                                    hover:underline
+                                `}
+                            >
+                                {link}
+                            </li>
+                        ))}
+                    </ul>
+                    <img
+                        src="public/images/icon-close.svg"
+                        alt=""
+                        className="
+                            absolute
+                            right-4
+                            top-4
+                            cursor-pointer
+                        "
+                        onClick={handleMenu}
+                    />
+                </div>
+            )}
         </header>
     );
 };
